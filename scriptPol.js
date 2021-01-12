@@ -20,7 +20,6 @@ for(p=1;p<=l; p++){
     poly.push(slice(sorted, sorted[0]+num2, sorted[0]+p)/100)
     num2+=1;
 }
-console.log(polx, poly)
 
 
 

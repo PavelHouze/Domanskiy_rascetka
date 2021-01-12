@@ -20,7 +20,6 @@ for(p=1;p<=l; p++){
     gistoy2.push(slice(sorted, sorted[0]+num2, sorted[0]+p));
     num2+=1;
 }
-console.log(gistox2, gistoy2)
 
 ctx = document.getElementById('myChart');
  var myChart = new Chart(ctx, {

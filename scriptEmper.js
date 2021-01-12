@@ -22,9 +22,6 @@ for(n=2; n<=10; n++){
    summ+=bj;
  Embery.push(summ/100);
 }
-console.log(Emberx)
-console.log(Embery)
-
 
 ctx = document.getElementById('emper');
 var myLineChart = new Chart(ctx, {

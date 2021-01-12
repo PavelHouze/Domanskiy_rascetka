@@ -17,7 +17,6 @@ div1+= '<br>'+sorted.slice(24,49);
 div1+= '<br>'+sorted.slice(49,74);
 div1+= '<br>'+sorted.slice(74,100)+"</div>";
 div1+= `<div>------------------------------------------------------</div>`
-console.log(sorted)
 var w = sorted[sorted.length-1] - sorted[0];
 var l = 9;
 var h = w/l;
@@ -65,7 +64,6 @@ for (j=1; j<=l; j++){
     summN+=slice(sorted, sorted[0]+num2, sorted[0]+j);
     summNX+=slice(sorted, sorted[0]+num2, sorted[0]+j) * (sorted[0]+num2+(sorted[0]+j))/2;
     summNiXiSqrt+=slice(sorted, sorted[0]+num2, sorted[0]+j) * Math.pow((sorted[0]+num2+(sorted[0]+j))/2, 2);
-    console.log(summNX);
     num2+=1;
 }
 x = (summNX/summN);
@@ -107,7 +105,7 @@ var summNsh=0;
 var xstrange=0;
 var summNxn=0;
 for(h=1; h<=l; h++){
-    div1+=`<div>${h} | ${slice(sorted, sorted[0]+num2, sorted[0]+h)} | ${smallArr[0+num2]} | ${slice(sorted, sorted[0]+num2, sorted[0])+h-smallArr[0+num2]} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h)-smallArr[0+num2], 2)} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h)-smallArr[0+num2], 2)/smallArr[0+num2]} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h))^2} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h),2)/smallArr[0+num2]} </div>`
+    div1+=`<div>${h} | ${slice(sorted, sorted[0]+num2, sorted[0]+h)} | ${smallArr[0+num2]} | ${slice(sorted, sorted[0]+num2, sorted[0])+h-smallArr[0+num2]} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h)-smallArr[0+num2], 2)} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h)-smallArr[0+num2], 2)/smallArr[0+num2]} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h),2)} | ${Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h),2)/smallArr[0+num2]} </div>`
     summN+=slice(sorted, sorted[0]+num2, sorted[0]+h);
     summNsh+=smallArr[0+num2];
     xstrange+=Math.pow(slice(sorted, sorted[0]+num2, sorted[0]+h)-smallArr[0+num2], 2)/smallArr[0+num2];
@@ -115,9 +113,26 @@ for(h=1; h<=l; h++){
     num2++;
 }
 div1+=`<strong>Сумма N - ${summN} | Сумма N' - ${summNsh} | Сумма странная x^2 - ${xstrange} | Сумма ni^2/ni' - ${summNxn}`
-div1+= `<div>Разность суммы ni^2/ni' и странной x^2 = ${summNxn-summN} = ${xstrange}</strong></div>`
-div1+=`<button onclick="window.location.href = './Task2.html'">Задание 2</button>`
+div1+= `<div>Разность суммы (ni^2/ni')-n = ${summNxn-summN} = (ni-ni')^2/n = ${xstrange}</strong></div>`
 div1+= `<div>------------------------------------------------------</div>`
+var alpha = 0.025;
+var xstrangeeo = 17.5;
+div1+=`<div><strong>Степени свободы - k = ${l-1}, альфа - ${alpha}, X^2eo = ${xstrangeeo}</strong></div>`
+div1+=`<div><strong>Находим доверительный интервал для математического ожидания, для нормального распределения и для дисперсии по данной формуле:</strong></div>`
+div1+=`<div><img src='./formula.png' width="600" height="200"></img><div>`
+div1+=`<div><strong>Где X-${x},n=${summN}, s=omega=${sigma}</strong></div>`
+var alphanad = 1 - 0.9;
+var k = summN - 1;
+var t = 1.9842170;
+var deltax = (1/Math.sqrt(summN))*t*sigma;
+div1+=`<div><strong>Значение t(${alphanad/2};${k}) находим по таблице что равно - ${t}</strong></div>`
+div1+=`<div><strong>delta X = ${deltax}</strong></div>`
+div1+=`<div><strong>Получаем ${x-deltax} меньше Mx меньше ${x+deltax}</strong></div>`
+div1+=`<div><strong>Построим доверительный интервал для среднего квадратического отклонения. Применяем формулу:</strong></div>`
+div1+=`<div><img src='./formula2.png' width="200" height="100"></img><div>`
+div1+=`<div><strong>где n – 1 = 100 – 1 = 99.</strong></div>`
+div1+=`<div><strong>${((summN-1)/123.23)*sigma} меньше sigma меньше ${((summN-1)/77.05)*sigma}</strong></div>`
+div1+=`<button onclick="window.location.href = './Task2.html'">Задание 2</button>`
 document.body.innerHTML = div1;
 function slice(array, start, end) 
 {
